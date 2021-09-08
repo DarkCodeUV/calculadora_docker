@@ -1,63 +1,36 @@
-var operation ;
-var result;
-var area;
- 
-                 
+let screen = document.querySelector('#screen-result');
 
-function calculateSum(){
-    var operationElement = document.getElementById("insertOperation");
-    operation = operationElement.value;
-    operationElement.value= operation+"+";
+function getData(ref) {
+    let value = ref.value;
+    screen.value += value;
 }
 
-function calculateSubtration(){
-    var operationElement = document.getElementById("insertOperation");
-    operation = operationElement.value;
-    operationElement.value= operation+"-";
+function clean() {
+    screen.value = '';
 }
 
-function calculateMultiplication(){
-    var operationElement = document.getElementById("insertOperation");
-    operation = operationElement.value;
-    operationElement.value= operation+"*";
-}
-
-function calculateDivision(){
-    var operationElement = document.getElementById("insertOperation");
-    operation = operationElement.value;
-    operationElement.value= operation+"/";
-}
-
-function calculateSquaredValueTwo(){
-    var operationElement = document.getElementById("insertOperation");
-    operation = operationElement.value;
-    operationElement.value= operation+"²";
-}
-
-//Falta hacer que se coloque la raiz
-function calculateSquare(){
-    var operationElement = document.getElementById("insertOperation");
-    operation = operationElement.value;
-    operationElement.value= operation+"raiz";
-}
-
-function calculatePow(){
-    var operationElement = document.getElementById("insertOperation");
-    operation = operationElement.value;
-    operationElement.value= operation+"^";
+function calculate() {
+    try {
+        //if(screen.value === undefined ) return  screen.value = 0;
+        let valor = eval(screen.value);
+        
+        if (typeof  valor !== "number" || isNaN(eval(valor))){
+            setTimeout(() => {
+                clean();
+            }, 1000);
+            return screen.value = `Syntax ERROR`;
+        }
+        screen.value = eval(screen.value);
+    } catch (error) {
+        screen.value = 'Error';
+        setTimeout(() => {
+            clean();
+        }, 1000);
+    }
 }
 
 
-function clearAll(){
-    var operationElement = document.getElementById("insertOperation");
-    operation = operationElement.value;
-    operationElement.value= "";
-}
 
 
-//Falta hacer que se resuelva
-function equal(){
-    var operationElement = document.getElementById("insertOperation");
-    operation = operationElement.value;
-    operationElement.value= "";
-}
+
+
